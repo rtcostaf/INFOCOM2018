@@ -1,0 +1,26 @@
+  1) Run the SDN controller
+  $ sudo ryu-manager Controller_DBR.py
+  
+  2) Turn on the topology (requires mininet):
+  $ sudo ./Topo_DBR.py
+  
+  3) Copy the desired video load to "static_trace.csv", like the following example:
+  $ sudo cp traces/dash-load.csv static_trace.csv
+  
+  4) Run the video launcher routine:
+  
+  $ sudo bash video_launcher.sh [output_file]
+  
+  Consolidated results will be written in "output_file". CSV fields are listed below:
+
+  end_time;duration;startup_time;stall_lenght;stall_count;destination;source;video_uuid
+
+  The folder "videologs" will contain detailed logs for each video played.
+  
+  It's expected that each content provider in topology (CDN1, CDN2, CDN3, EXT1) will have a webserver where each video segment (HAS) is available according to the following format:
+  
+  http://[cdn_ip]/[video_id]-[integer_resolution]/[video_id]-seg[integer_segment_id].mp4 , e.g.
+  
+  http://10.0.0.251/muse-1080/muse-seg30.mp4
+  http://10.0.0.252/gt-720/gt-seg240.mp4
+  http://10.0.0.252/ny-360/ny-seg120.mp4
